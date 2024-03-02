@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ColorPicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="mainWindow" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="790.0" prefWidth="1210.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.painter.HelloController">
+   <children>
+      <AnchorPane fx:id="drawingArea" layoutX="136.0" layoutY="90.0" prefHeight="700.0" prefWidth="700.0">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="600.0" layoutX="59.0" layoutY="59.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="7.0" width="600.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="600.0" layoutX="50.0" layoutY="50.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="7.0" width="600.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="600.0" layoutX="41.0" layoutY="40.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="7.0" width="600.0" />
+            <Canvas fx:id="drawingCanvas" height="700.0" onMouseDragged="#mouseDragged" onMousePressed="#mousePressed" width="700.0" />
+         </children></AnchorPane>
+      <AnchorPane fx:id="menuBar" layoutY="32.0" prefHeight="56.0" prefWidth="836.0" style="-fx-border-color: black; -fx-border-width: 3; -fx-background-color: white;">
+         <children>
+            <Button alignment="TOP_CENTER" layoutX="130.0" layoutY="7.0" mnemonicParsing="false" onMouseClicked="#undo" prefHeight="40.0" prefWidth="105.0" style="-fx-font-family: Garamond; -fx-background-color: none; -fx-text-fill: black; -fx-font-size: 25; -fx-font-weight: bold;" text="Undo" />
+            <Button alignment="TOP_CENTER" layoutX="350.0" layoutY="7.0" mnemonicParsing="false" onMouseClicked="#help" prefHeight="40.0" prefWidth="105.0" style="-fx-font-family: Garamond; -fx-background-color: none; -fx-text-fill: black; -fx-font-size: 25; -fx-font-weight: bold;" text="Help" />
+            <Button alignment="TOP_CENTER" layoutX="20.0" layoutY="7.0" mnemonicParsing="false" onMouseClicked="#save" prefHeight="40.0" prefWidth="105.0" style="-fx-font-family: Garamond; -fx-background-color: none; -fx-text-fill: black; -fx-font-size: 25; -fx-font-weight: bold;" text="Save" />
+            <Button alignment="TOP_CENTER" layoutX="240.0" layoutY="7.0" mnemonicParsing="false" onMouseClicked="#redo" prefHeight="40.0" prefWidth="105.0" style="-fx-font-family: Garamond; -fx-background-color: none; -fx-text-fill: black; -fx-font-size: 25; -fx-font-weight: bold;" text="Redo" />
+         </children></AnchorPane>
+      <AnchorPane fx:id="orderListArea" layoutX="836.0" layoutY="32.0" prefHeight="758.0" prefWidth="375.0" style="-fx-border-color: black; -fx-background-color: white;">
+         <children>
+            <VBox>
+               <Label alignment="CENTER" contentDisplay="CENTER" layoutX="3.0" prefHeight="76.0" prefWidth="370.0" style="-fx-border-color: black; -fx-border-width: 3; -fx-border-style: solid;" text="Order List">
+                  <font>
+                     <Font name="Garamond Bold" size="35.0" />
+                  </font></Label>
+               <Label alignment="CENTER" layoutX="3.0" layoutY="82.0" prefHeight="34.0" prefWidth="370.0" style=" -fx-border-color:black; -fx-border-width: 1; -fx-border-style: solid;" text="The more it is above, the more ahead">
+                  <font>
+                     <Font name="Garamond" size="21.0" />
+                  </font>
+               </Label>
+               <ListView fx:id="shapesListView" style="-fx-border-color: black;" />
+            </VBox>
+
+            <Button layoutX="72.0" layoutY="677.0" mnemonicParsing="false" onMouseClicked="#moveToBack" prefHeight="45.0" prefWidth="230.0" style="-fx-background-color: white; -fx-text-fill: black; -fx-border-color: black; -fx-font-size: 20; -fx-font-family: Garamond; -fx-border-width: 3; -fx-font-weight: bold;" text="↓ Move Backward">
+               <font>
+                  <Font name="Garamond" size="36.0" />
+               </font>
+            </Button>
+            <Button layoutX="72.0" layoutY="605.0" mnemonicParsing="false" onMouseClicked="#moveToFront" prefHeight="45.0" prefWidth="230.0" style="-fx-background-color: white; -fx-text-fill: black; -fx-border-color: black; -fx-font-size: 20; -fx-font-family: Garamond; -fx-border-width: 3; -fx-font-weight: Bold;" text="↑ Move Forward ">
+               <font>
+                  <Font name="Garamond" size="36.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="lineMenu" layoutX="-1.0" layoutY="90.0" prefHeight="700.0" prefWidth="136.0" style="-fx-border-color: black; -fx-border-width: 3; -fx-background-color: white;">
+         <children>
+            <Label layoutX="10.0" layoutY="6.0" prefHeight="30.0" prefWidth="69.0" text="Line">
+               <font>
+                  <Font name="Garamond Bold" size="25.0" />
+               </font>
+            </Label>
+            <Line endX="104.60005187988281" endY="7.62939453125E-6" layoutX="16.0" layoutY="36.0" startX="-13.599956512451172" startY="7.62939453125E-6" />
+            <Label layoutX="10.0" layoutY="145.0" prefHeight="30.0" prefWidth="69.0" text="Color">
+               <font>
+                  <Font name="Garamond Bold" size="25.0" />
+               </font>
+            </Label>
+            <Label layoutX="10.0" layoutY="41.0" prefHeight="30.0" prefWidth="92.0" text="Line Weight">
+               <font>
+                  <Font name="Garamond Bold" size="17.0" />
+               </font>
+            </Label>
+            <Button alignment="CENTER" layoutX="13.0" layoutY="220.0" mnemonicParsing="false" onMouseClicked="#changeLineColor" prefHeight="32.0" prefWidth="106.0" style="-fx-background-color: white; -fx-text-fill: black; -fx-font-family: Garamond; -fx-border-color: black;" text="Change..." />
+            <ImageView fx:id="backButton" fitHeight="32.0" fitWidth="36.0" layoutX="9.0" layoutY="659.0" onMouseClicked="#goToMain" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@backButton.PNG" />
+               </image>
+            </ImageView>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#000000" height="20.0" layoutX="13.0" layoutY="186.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" width="20.0" />
+            <Text layoutX="37.0" layoutY="204.0" strokeType="OUTSIDE" strokeWidth="0.0" text="#000000">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <Line endX="42.00004577636719" layoutX="-3.0" layoutY="76.0" startX="18.700000762939453" />
+            <Line endX="42.00004577636719" layoutX="-3.0" layoutY="82.0" startX="18.700000762939453" strokeWidth="2.0" />
+            <Line endX="42.00004577636719" layoutX="-3.0" layoutY="89.0" startX="18.700000762939453" strokeWidth="3.0" />
+            <Line endX="42.00004577636719" layoutX="-3.0" layoutY="98.0" startX="18.700000762939453" strokeWidth="4.0" />
+            <TextField fx:id="lineWeightTextField" layoutX="51.0" layoutY="74.0" onAction="#adjustLineWeight" prefHeight="26.0" prefWidth="33.0" style="-fx-border-color: black; -fx-border-width: 1;" />
+
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="shapeMenu" layoutX="-1.0" layoutY="90.0" prefHeight="700.0" prefWidth="136.0" style="-fx-border-color: black; -fx-border-width: 3; -fx-background-color: white;">
+         <children>
+            <Label layoutX="10.0" layoutY="6.0" prefHeight="30.0" prefWidth="69.0" text="Shape">
+               <font>
+                  <Font name="Garamond Bold" size="25.0" />
+               </font>
+            </Label>
+            <Line endX="104.60005187988281" endY="7.62939453125E-6" layoutX="16.0" layoutY="36.0" startX="-13.599956512451172" startY="7.62939453125E-6" />
+            <Line endX="104.60005187988281" endY="7.62939453125E-6" layoutX="18.0" layoutY="421.0" startX="-13.599956512451172" startY="7.62939453125E-6" />
+            <Line endX="104.60005187988281" endY="7.62939453125E-6" layoutX="18.0" layoutY="390.0" startX="-13.599956512451172" startY="7.62939453125E-6" />
+            <Label layoutX="10.0" layoutY="391.0" prefHeight="30.0" prefWidth="69.0" text="Color">
+               <font>
+                  <Font name="Garamond Bold" size="25.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="99.0" fitWidth="119.0" layoutX="25.0" layoutY="48.0" onMouseClicked="#drawCircle" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@circleButton.PNG" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="99.0" fitWidth="84.0" layoutX="26.0" layoutY="156.0" onMouseClicked="#drawTriangle" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@triangleButton.PNG" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="88.0" fitWidth="84.0" layoutX="26.0" layoutY="272.0" onMouseClicked="#drawRectangle" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@rectangleButton.PNG" />
+               </image>
+            </ImageView>
+            <Label layoutX="10.0" layoutY="545.0" prefHeight="30.0" prefWidth="69.0" text="Inner">
+               <font>
+                  <Font name="Garamond Bold" size="25.0" />
+               </font>
+            </Label>
+            <Label layoutX="10.0" layoutY="435.0" prefHeight="30.0" prefWidth="92.0" text="Border">
+               <font>
+                  <Font name="Garamond Bold" size="25.0" />
+               </font>
+            </Label>
+            <Button alignment="CENTER" layoutX="15.0" layoutY="510.0" mnemonicParsing="false" onMouseClicked="#borderColorChange" prefHeight="32.0" prefWidth="106.0" style="-fx-background-color: white; -fx-text-fill: black; -fx-font-family: Garamond; -fx-border-color: black;" text="Change..." />
+            <ColorPicker fx:id="colorPicker" layoutX="13.0" layoutY="620.0" onAction="#innerColorChange" prefHeight="30" prefWidth="80" />
+            <Button alignment="CENTER" layoutX="13.0" layoutY="620.0" mnemonicParsing="false" onMouseClicked="#innerColorChange" prefHeight="32.0" prefWidth="106.0" style="-fx-background-color: white; -fx-text-fill: black; -fx-font-family: Garamond; -fx-border-color: black;" text="Change..." />
+
+
+            <ImageView fitHeight="32.0" fitWidth="36.0" layoutX="9.0" layoutY="659.0" onMouseClicked="#goToMain" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@backButton.PNG" />
+               </image>
+            </ImageView>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="20.0" layoutX="13.0" layoutY="476.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" width="20.0" />
+            <Rectangle fx:id="innerColorBox" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="20.0" layoutX="13.0" layoutY="586.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" width="20.0" />
+            <Text layoutX="37.0" layoutY="494.0" strokeType="OUTSIDE" strokeWidth="0.0" text="#FFFFFF">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <Text fx:id="colorCode" layoutX="37.0" layoutY="604.0" strokeType="OUTSIDE" strokeWidth="0.0" text="#FFFFFF">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="mainMenu" layoutX="-1.0" layoutY="90.0" prefHeight="700.0" prefWidth="136.0" style="-fx-border-color: black; -fx-border-width: 3; -fx-background-color: white; -fx:controller=com.example.painter.HelloController">
+         <children>
+            <ImageView fitHeight="121.0" fitWidth="79.0" layoutX="29.0" layoutY="20.0" onMouseClicked="#select" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@selectButton.PNG" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="110.0" fitWidth="79.0" layoutX="29.0" layoutY="150.0" onMouseClicked="#goToLine" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@lineButton.PNG" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="114.0" fitWidth="79.0" layoutX="29.0" layoutY="280.0" onMouseClicked="#goToShape" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@shapesButton.PNG" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="114.0" fitWidth="82.0" layoutX="29.0" layoutY="540.0" onMouseClicked="#delete" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@deleteButton.PNG" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="126.0" fitWidth="79.0" layoutX="29.0" layoutY="410.0" onMouseClicked="#copy" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@copyButton.PNG" />
+               </image>
+            </ImageView>
+         </children></AnchorPane>
+      <AnchorPane fx:id="helpMenu" layoutX="152.0" prefHeight="790.0" prefWidth="893.0" style="-fx-background-color: white;">
+         <children>
+            <ImageView fitHeight="790.0" fitWidth="796.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@help.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="60.0" fitWidth="70.0" layoutX="826.0" layoutY="7.0" onMouseClicked="#goToMainWindow" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@close-button.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
